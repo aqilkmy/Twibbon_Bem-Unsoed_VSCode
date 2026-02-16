@@ -29,11 +29,11 @@ const TWIBBON_URL = '/twibbons/twibbon-oprec.png'
 // Caption for social media
 const CAPTION_TEXT = `[OPEN RECRUITMENT STAF BEM UNSOED 2026]
 
-Halo, Generasi Soedirman!
+Halo, Soedirman muda!
 
-Saya (nama lengkap) dari (fakultas) siap bergabung bersama BEM Unsoed (alasan ingin masuk BEM Unsoed)
+Saya (nama lengkap) dari (fakultas) siap beraksi bersama BEM Unsoed (apa yang ingin kamu lakukan di BEM Unsoed)
 
-Mari bersama-sama berkolaborasi, menjadi satu kesatuan untuk membawa perubahan yang nyata🌟
+Mari berkolaborasi bersama BEM Unsoed, untuk menciptakan aksi dan perubahan nyata🌟
 
 (mention @bem_unsoed dan 3 teman kamu)
 
@@ -69,10 +69,12 @@ function App() {
   useEffect(() => {
     const updateCanvasSize = () => {
       if (containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth - 32
-        const maxWidth = Math.min(containerWidth, 400)
+        const containerWidth = containerRef.current.offsetWidth - 24
+        const screenWidth = window.innerWidth
+        // More aggressive scaling on mobile
+        const maxWidth = screenWidth < 640 ? Math.min(containerWidth, 320) : Math.min(containerWidth, 400)
         const aspectRatio = CANVAS_HEIGHT / CANVAS_WIDTH
-        const displayWidth = Math.max(280, maxWidth)
+        const displayWidth = Math.max(260, maxWidth)
         const displayHeight = displayWidth * aspectRatio
         
         setCanvasDisplaySize({ width: displayWidth, height: displayHeight })
@@ -348,24 +350,24 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-primary">
       {/* Header */}
-      <header className="glass sticky top-0 z-50 px-4 shadow-lg">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-20 h-20 rounded-xl flex items-center justify-center overflow-hidden">
-              <img src="/logo.ico" alt="Logo" className="w-20 h-20 object-contain" />
+      <header className="glass sticky top-0 z-50 px-3 sm:px-4 shadow-lg">
+        <div className="max-w-6xl mx-auto flex items-center justify-between py-2 sm:py-0">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0">
+              <img src="/logo.ico" alt="Logo" className="w-12 h-12 sm:w-16 sm:h-16 object-contain" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-white">Twibbon BEM Unsoed 2026</h1>
+            <div className="min-w-0">
+              <h1 className="text-base sm:text-xl font-bold text-white truncate">Twibbon BEM Unsoed 2026</h1>
               <p className="text-xs text-gray-300 hidden sm:block">Open Recruitment BEM Unsoed 2026</p>
             </div>
           </div>
-          <div className="text-highlight-light text-sm font-medium">
+          <div className="text-highlight-light text-xs sm:text-sm font-medium hidden xs:block">
             #BEMUnsoed2026
           </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
         {/* Error Alert */}
         {error && (
           <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-4 flex items-center gap-3 animate-slide-up">
@@ -390,7 +392,7 @@ function App() {
           </div>
         )}
 
-        <div className="grid lg:grid-cols-[1fr,420px] gap-6">
+        <div className="grid lg:grid-cols-[1fr,400px] gap-4 sm:gap-6">
           {/* Canvas Section */}
           <div className="space-y-4">
             {/* Canvas Container */}
@@ -419,9 +421,9 @@ function App() {
             </div>
 
             {/* Controls */}
-            <div className="card space-y-4">
+            <div className="card space-y-3 sm:space-y-4">
               {/* Upload Button */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -431,7 +433,7 @@ function App() {
                 />
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="btn-primary flex items-center gap-2 flex-1 justify-center"
+                  className="btn-primary flex items-center gap-2 flex-1 justify-center min-h-[44px]"
                 >
                   <Upload className="w-5 h-5" />
                   <span>{userPhoto ? 'Ganti Foto' : 'Upload Foto'}</span>
@@ -440,7 +442,7 @@ function App() {
                 <button
                   onClick={handleDownload}
                   disabled={!userPhoto || isProcessing}
-                  className="btn-primary flex items-center gap-2 flex-1 justify-center bg-gradient-highlight text-primary-dark disabled:opacity-50"
+                  className="btn-primary flex items-center gap-2 flex-1 justify-center bg-gradient-highlight text-primary-dark disabled:opacity-50 min-h-[44px]"
                 >
                   {isProcessing ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -536,10 +538,10 @@ function App() {
           </div>
 
           {/* Caption Section */}
-          <div className="card h-fit lg:sticky lg:top-24">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-                <MessageSquareText className="w-5 h-5 text-highlight-light" />
+          <div className="card h-fit lg:sticky lg:top-20">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h2 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                <MessageSquareText className="w-4 h-4 sm:w-5 sm:h-5 text-highlight-light" />
                 Caption
               </h2>
               <button
@@ -564,8 +566,8 @@ function App() {
               </button>
             </div>
 
-            <div className="bg-primary-dark/50 rounded-xl p-4 max-h-[50vh] overflow-y-auto">
-              <pre className="text-gray-300 text-sm whitespace-pre-wrap font-sans leading-relaxed">
+            <div className="bg-primary-dark/50 rounded-xl p-3 sm:p-4 max-h-[35vh] sm:max-h-[50vh] overflow-y-auto">
+              <pre className="text-gray-300 text-xs sm:text-sm whitespace-pre-wrap font-sans leading-relaxed">
                 {CAPTION_TEXT}
               </pre>
             </div>
@@ -579,11 +581,11 @@ function App() {
 
         {/* Instructions */}
         <div className="card">
-          <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-            <HelpCircle className="w-5 h-5 text-accent" />
+          <h3 className="text-white font-semibold mb-2 sm:mb-3 flex items-center gap-2 text-sm sm:text-base">
+            <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
             Cara Penggunaan
           </h3>
-          <ol className="text-gray-300 text-sm space-y-2 list-decimal list-inside">
+          <ol className="text-gray-300 text-xs sm:text-sm space-y-1.5 sm:space-y-2 list-decimal list-inside">
             <li>Klik "Upload Foto" untuk memilih foto dari perangkat kamu</li>
             <li>Atur posisi foto dengan drag, dan gunakan slider untuk zoom/rotasi</li>
             <li>Klik "Download" untuk menyimpan hasil twibbon-mu</li>
@@ -594,12 +596,12 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="glass mt-8 py-6 px-4">
+      <footer className="glass mt-6 sm:mt-8 py-4 sm:py-6 px-3 sm:px-4">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-xs sm:text-sm">
             ©Kementrian Koordinasi Riset Media 2026 BEM Unsoed.
           </p>
-          <p className="text-gray-500 text-xs mt-2">
+          <p className="text-gray-500 text-[10px] sm:text-xs mt-1 sm:mt-2">
             Open Recruitment BEM Unsoed 2026 - "Merajut Kolaborasi, Wujudkan Aksi!"
           </p>
         </div>

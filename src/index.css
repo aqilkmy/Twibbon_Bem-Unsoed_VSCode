@@ -164,11 +164,26 @@ body {
   }
 }
 
+/* Extra small devices */
+@media (max-width: 374px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .card {
+    padding: 0.75rem;
+  }
+}
+
 /* Mobile-first responsive canvas */
 @media (max-width: 640px) {
   .canvas-wrapper {
     max-width: 100%;
     touch-action: none;
+  }
+  
+  .canvas-container {
+    border-radius: 1rem;
   }
 }
 
