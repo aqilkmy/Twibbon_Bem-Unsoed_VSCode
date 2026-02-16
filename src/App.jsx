@@ -350,7 +350,7 @@ function App() {
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-20 h-20 rounded-xl flex items-center justify-center overflow-hidden">
-              <img src="/logo.png" alt="Logo" className="w-20 h-20 object-contain" />
+              <img src="/logo.ico" alt="Logo" className="w-20 h-20 object-contain" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-white">Twibbon BEM Unsoed 2026</h1>
