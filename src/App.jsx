@@ -14,7 +14,9 @@ import {
   AlertCircle,
   X,
   Copy,
-  MessageSquareText
+  MessageSquareText,
+  HelpCircle,
+  Info
 } from 'lucide-react'
 
 // Canvas dimensions (vertical format)
@@ -569,7 +571,7 @@ function App() {
             </div>
 
             <p className="text-gray-400 text-xs mt-3 flex items-center gap-2">
-              <img src="/logo.png" alt="" className="w-3 h-3 object-contain" />
+              <Info className="w-3 h-3" />
               Klik tombol "Salin" untuk copy caption ke clipboard
             </p>
           </div>
@@ -578,7 +580,7 @@ function App() {
         {/* Instructions */}
         <div className="card">
           <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-            <img src="/logo.png" alt="" className="w-5 h-5 object-contain" />
+            <HelpCircle className="w-5 h-5 text-accent" />
             Cara Penggunaan
           </h3>
           <ol className="text-gray-300 text-sm space-y-2 list-decimal list-inside">
