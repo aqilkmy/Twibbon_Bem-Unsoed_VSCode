@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #212A47 0%, #5066AD 100%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(33, 42, 71, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #872B2E 0%, #A64F52 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #A64F52 0%, #872B2E 100%);
+}
+
+/* Custom range slider styles */
+@layer components {
+  .slider-custom {
+    @apply w-full h-2 rounded-full appearance-none cursor-pointer;
+    background: linear-gradient(90deg, #212A47 0%, #5066AD 100%);
+  }
+
+  .slider-custom::-webkit-slider-thumb {
+    @apply appearance-none w-5 h-5 rounded-full cursor-pointer shadow-lg;
+    background: linear-gradient(135deg, #D79146 0%, #EEC69B 100%);
+    border: 2px solid #fff;
+    transition: transform 0.2s ease;
+  }
+
+  .slider-custom::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+  }
+
+  .slider-custom::-moz-range-thumb {
+    @apply w-5 h-5 rounded-full cursor-pointer shadow-lg border-0;
+    background: linear-gradient(135deg, #D79146 0%, #EEC69B 100%);
+    border: 2px solid #fff;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 rounded-xl font-semibold text-white transition-all duration-300;
+    background: linear-gradient(135deg, #872B2E 0%, #A64F52 100%);
+    box-shadow: 0 4px 15px rgba(135, 43, 46, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(135, 43, 46, 0.5);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .btn-primary:disabled {
+    @apply opacity-50 cursor-not-allowed;
+    transform: none;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded-lg font-medium text-white transition-all duration-300;
+    background: rgba(80, 102, 173, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(80, 102, 173, 0.7);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Card styles */
+  .card {
+    @apply rounded-2xl p-4 transition-all duration-300;
+    background: rgba(33, 42, 71, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .card:hover {
+    border-color: rgba(215, 145, 70, 0.5);
+    box-shadow: 0 0 20px rgba(215, 145, 70, 0.2);
+  }
+
+  /* Twibbon gallery item */
+  .twibbon-item {
+    @apply relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300;
+    aspect-ratio: 1080/1350;
+  }
+
+  .twibbon-item:hover {
+    transform: scale(1.05);
+  }
+
+  .twibbon-item.selected {
+    @apply ring-4;
+    ring-color: #D79146;
+    box-shadow: 0 0 25px rgba(215, 145, 70, 0.5);
+  }
+
+  .twibbon-item img {
+    @apply w-full h-full object-cover;
+  }
+
+  /* Canvas container */
+  .canvas-container {
+    @apply relative mx-auto rounded-2xl overflow-hidden;
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Loading spinner */
+  .spinner {
+    @apply w-8 h-8 rounded-full animate-spin;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #D79146;
+  }
+
+  /* Glass effect */
+  .glass {
+    background: rgba(33, 42, 71, 0.7);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .slider-custom::-webkit-slider-thumb {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    min-height: 48px;
+  }
+}
+
+/* Mobile-first responsive canvas */
+@media (max-width: 640px) {
+  .canvas-wrapper {
+    max-width: 100%;
+    touch-action: none;
+  }
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Stagger animation for gallery items */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
